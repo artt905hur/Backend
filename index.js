@@ -11,86 +11,86 @@ app.listen(process.env.PORT || 3000);
 
 
 
-const ronaldinho = '{ "name":"Ronaldinho Gaucho", "type":"meio-atacante"}';
-const lucio = '{ "name":"Lúcio", "type":"Zagueiro" }';
-const tafarel = '{ "name":"Tafarel", "type":"Goleiro"}';
-const neymar = '{ "name":"Neymar Jr", "type":"Ponta Esquerda"}';
-const kaka = '{ "name":"Kaka", "type":"Meio campo"}';
-const daniel  = '{ "name":"Daniel Alves ", "type":"Lateral Direito"}';
-const roberto = '{ "name":"roberto carlos", "type":"Lateral Esquerdo"}';
-const ronaldo = '{ "name":"Ronaldo Fenomeno", "type":"Centro-Avante"}';
-const william  = '{ "name":"William", "type":"Ponta Direita"}';
-const paulinho  = '{ "name":"Paulinho", "type":"segundo volante"}';
-const dunga  = '{ "name":"Dunga", "type":"primeiro volante"}';
+const lespaul = '{ "name":"Les Paul", "type":"Gibson"}';
+const flyingv = '{ "name":"Flying V", "type":"Gibson" }';
+const xplorer = '{ "name":"Explorer", "type":"Gibson"}';
+const firebird = '{ "name":"Firebird", "type":"Gibson"}';
+const sg = '{ "name":"SG", "type":"Gibson"}';
+const stratocaster  = '{ "name":"Stratocaster ", "type":"Fender"}';
+const telecaster = '{ "name":"Telecaster", "type":"Fender"}';
+const jaguar = '{ "name":"Jaguar", "type":"Fender"}';
+const jazzmaster  = '{ "name":"Jazzmaster", "type":"Fender"}';
+const gio  = '{ "name":"Gio", "type":"Ibanez"}';
+const t635  = '{ "name":"T-635", "type":"Tagima"}';
 
 
 
-const time = [ JSON.parse(ronaldinho), 
-                  JSON.parse(lucio),
-                  JSON.parse(tafarel),
-                  JSON.parse(neymar),
-                  JSON.parse(kaka),
-                  JSON.parse(daniel),
-                  JSON.parse(roberto),
-                  JSON.parse(ronaldo),
-                  JSON.parse(william),
-                  JSON.parse(paulinho),
-                  JSON.parse(dunga)
+const heaven = [ JSON.parse(lespaul), 
+                  JSON.parse(flyingv),
+                  JSON.parse(xplorer),
+                  JSON.parse(firebird),
+                  JSON.parse(sg),
+                  JSON.parse(stratocaster),
+                  JSON.parse(telecaster),
+                  JSON.parse(jaguar),
+                  JSON.parse(jazzmaster),
+                  JSON.parse(gio),
+                  JSON.parse(t635)
 ];
 
 
 app.get('/',
     function(req, res){
-        res.send("Olá esse é o dream team da seleção brasileira, não precisa nem treinar"); 
+        res.send("Você entrou no céu das guitarras, só escolher uma e tocar"); 
     }
 );
 
 
-app.get('/time',
+app.get('/heaven',
     function(req, res){
-        res.send(time.filter(Boolean)); 
+        res.send(heaven.filter(Boolean)); 
                                              
     }
 );
 
 
-app.get('/time/:id',
+app.get('/heaven/:id',
     function(req, res){
         const id = req.params.id - 1;
-        const times = time[id];
+        const heavens = heaven[id];
 
-        if (!times){
-            res.send("Jogador não encontrado");
+        if (!heavens){
+            res.send("Guitarra não encontrada");
         } else {
-            res.send(times);
+            res.send(heavens);
         }
     }
 )
 
-app.post('/time', 
+app.post('/heaven', 
     (req, res) => {
-        console.log(req.body.times); 
-        const times = req.body.times;
-        time.push(times); 
+        console.log(req.body.heavens); 
+        const heavens = req.body.heavens;
+        heaven.push(heavens); 
                                  
-        res.send("Craque adicionado")
+        res.send("Guitarra adicionada.")
     }
 );
 
-app.put('/time/:id',
+app.put('/heaven/:id',
     (req, res) => {
         const id = req.params.id - 1;
-        const times = req.body.times;
-        time[id] = times;        
-        res.send("Craque atualizado com sucesso.")
+        const heavens = req.body.heavens;
+        heaven[id] = heavens;        
+        res.send("Guitarra atualizada.")
     }
 )
 
-app.delete('/time/:id', 
+app.delete('/heaven/:id', 
     (req, res) => {
         const id = req.params.id - 1;
-        delete time[id];
+        delete heaven[id];
 
-        res.send("Craque lesionado");
+        res.send("Aí não! Guitarra quebrada.");
     }
 );
