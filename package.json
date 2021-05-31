@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ulissesdias/tt905-2021-backend-node-js.git"
+    "url": "git+https://github.com/artt905hur/Backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ulissesdias/tt905-2021-backend-node-js/issues"
+    "url": "https://github.com/artt905hur/Backend/issues"
   },
-  "homepage": "https://github.com/ulissesdias/tt905-2021-backend-node-js#readme",
+  "homepage": "https://github.com/artt905hur/Backend#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
