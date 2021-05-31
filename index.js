@@ -33,8 +33,8 @@ const time = [ JSON.parse(ronaldinho),
                   JSON.parse(daniel),
                   JSON.parse(roberto),
                   JSON.parse(ronaldo),
-                  JSON.parse(william)
-                  JSON.parse(paulinho)
+                  JSON.parse(william),
+                  JSON.parse(paulinho),
                   JSON.parse(dunga)
 ];
 
