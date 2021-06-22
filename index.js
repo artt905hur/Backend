@@ -112,27 +112,27 @@ const options = {
 (async()=>{
     const client = await mongodb.MongoClient.connect(connectionString, options);
     const db = client.db('myFirstDatabase');
-    const heavens = db.collection('heavens');
-    console.log(await heavens.find({}).toArray());
+    const heaven = db.collection('heaven');
+    console.log(await heaven.find({}).toArray());
 
     app.get('/database',
         async function(req, res){
-        // res.send(heaven);
-        res.send(await heavens.find({}).toArray());
+        // res.send(heavens);
+        res.send(await heaven.find({}).toArray());
     }
 );
 
 app.get('/database/:id',
     async function(req, res){
         const id = req.params.id;
-        const heaven = await heavens.findOne(
+        const heavens = await heaven.findOne(
             {_id : mongodb.ObjectID(id)}
         );
-        console.log(heaven);
-        if (!heaven){
+        console.log(heavens);
+        if (!heavens){
             res.send("Guitarra não encontrada");
         } else {
-            res.send(heaven);
+            res.send(heavens);
         }
     }
 );
@@ -140,11 +140,11 @@ app.get('/database/:id',
 app.post('/database', 
     async (req, res) => {
         console.log(req.body);
-        const heaven = req.body;
+        const heavens = req.body;
         
-        delete heaven["_id"];
+        delete heavens["_id"];
 
-        heavens.insertOne(heaven);        
+        heaven.insertOne(heavens);        
         res.send("criar uma guitarra.");
     }
 );
@@ -152,22 +152,22 @@ app.post('/database',
 app.put('/database/:id',
     async (req, res) => {
         const id = req.params.id;
-        const heaven = req.body;
+        const heavens = req.body;
 
-        console.log(heaven);
+        console.log(heavens);
 
-        delete heaven["_id"];
+        delete heavens["_id"];
 
-        const num_heavens = await heavens.countDocuments({_id : mongodb.ObjectID(id)});
+        const num_heaven = await heaven.countDocuments({_id : mongodb.ObjectID(id)});
 
-        if (num_heavens !== 1) {
+        if (num_heaven !== 1) {
             res.send('Ocorreu um erro por conta do número de guitarras');
             return;
         }
 
-        await heavens.updateOne(
+        await heaven.updateOne(
             {_id : mongodb.ObjectID(id)},
-            {$set : heaven}
+            {$set : heavens}
         );
         
         res.send("Guitarra atualizada com sucesso.")
@@ -178,7 +178,7 @@ app.delete('/database/:id',
     async (req, res) => {
         const id = req.params.id;
         
-        await heavens.deleteOne({_id : mongodb.ObjectID(id)});
+        await heaven.deleteOne({_id : mongodb.ObjectID(id)});
 
         res.send("Guitarra removida com sucesso");
     }
