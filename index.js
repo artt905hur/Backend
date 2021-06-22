@@ -102,7 +102,7 @@ app.delete('/heaven/:id',
 const mongodb = require('mongodb')
 
 
-const connectionString = `mongodb+srv://admin:uZGahLHXYfBRZD3@cluster0.fhdc2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const connectionString = "mongodb+srv://admin:uZGahLHXYfBRZD3@cluster0.yjvlh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const options = { 
     useNewUrlParser: true, 
