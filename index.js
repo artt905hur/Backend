@@ -112,27 +112,27 @@ const options = {
 (async()=>{
     const client = await mongodb.MongoClient.connect(connectionString, options);
     const db = client.db('myFirstDatabase');
-    const heaven = db.collection('heaven');
-    console.log(await heaven.find({}).toArray());
+    const heavens = db.collection('heavens');
+    console.log(await heavens.find({}).toArray());
 
     app.get('/database',
         async function(req, res){
         // res.send(heavens);
-        res.send(await heaven.find({}).toArray());
+        res.send(await heavens.find({}).toArray());
     }
 );
 
 app.get('/database/:id',
     async function(req, res){
         const id = req.params.id;
-        const heavens = await heaven.findOne(
+        const heaven = await heavens.findOne(
             {_id : mongodb.ObjectID(id)}
         );
-        console.log(heavens);
-        if (!heavens){
-            res.send("Guitarra não encontrada");
+        console.log(heaven);
+        if (!heaven){
+            res.send("guitarra não encontrada");
         } else {
-            res.send(heavens);
+            res.send(heaven);
         }
     }
 );
@@ -140,11 +140,11 @@ app.get('/database/:id',
 app.post('/database', 
     async (req, res) => {
         console.log(req.body);
-        const heavens = req.body;
+        const heaven = req.body;
         
-        delete heavens["_id"];
+        delete heaven["_id"];
 
-        heaven.insertOne(heavens);        
+        heavens.insertOne(heaven);        
         res.send("criar uma guitarra.");
     }
 );
@@ -152,25 +152,25 @@ app.post('/database',
 app.put('/database/:id',
     async (req, res) => {
         const id = req.params.id;
-        const heavens = req.body;
+        const heaven = req.body;
 
-        console.log(heavens);
+        console.log(heaven);
 
-        delete heavens["_id"];
+        delete heaven["_id"];
 
-        const num_heaven = await heaven.countDocuments({_id : mongodb.ObjectID(id)});
+        const num_heavens = await heavens.countDocuments({_id : mongodb.ObjectID(id)});
 
-        if (num_heaven !== 1) {
+        if (num_heavens !== 1) {
             res.send('Ocorreu um erro por conta do número de guitarras');
             return;
         }
 
-        await heaven.updateOne(
+        await heavens.updateOne(
             {_id : mongodb.ObjectID(id)},
-            {$set : heavens}
+            {$set : heaven}
         );
         
-        res.send("Guitarra atualizada com sucesso.")
+        res.send("guitarra atualizada com sucesso.")
     }
 )
 
@@ -178,9 +178,10 @@ app.delete('/database/:id',
     async (req, res) => {
         const id = req.params.id;
         
-        await heaven.deleteOne({_id : mongodb.ObjectID(id)});
+        await heavens.deleteOne({_id : mongodb.ObjectID(id)});
 
-        res.send("Guitarra removida com sucesso");
+        res.send("guitarra removida com sucesso");
     }
 );
+
 })();
